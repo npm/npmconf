@@ -255,7 +255,7 @@ Conf.prototype.addEnv = function (env) {
             .toLowerCase()
             .replace(/_/g, '-')] = env[k]
     })
-  CC.prototype.addEnv.call(this, '', conf, 'env')
+  return CC.prototype.addEnv.call(this, '', conf, 'env')
 }
 
 function parseField (f, k, emptyIsFalse) {

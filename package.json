@@ -7,7 +7,7 @@
     "test": "test"
   },
   "dependencies": {
-    "config-chain": "~1.1.0",
+    "config-chain": "~1.1.1",
     "inherits": "~1.0.0",
     "once": "~1.1.1"
   },
