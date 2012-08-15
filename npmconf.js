@@ -8,6 +8,7 @@ var fs = require('fs')
 var path = require('path')
 var nopt = require('nopt')
 var ini = require('ini')
+var Octal = configDefs.Octal
 
 exports.load = load
 exports.Conf = Conf
@@ -264,8 +265,11 @@ function parseField (f, k, emptyIsFalse) {
   var isPath = -1 !== typeList.indexOf(path)
   var isBool = -1 !== typeList.indexOf(Boolean)
   var isString = -1 !== typeList.indexOf(String)
+  var isNumber = -1 !== typeList.indexOf(Number) ||
+                 -1 !== typeList.indexOf(Octal)
 
   f = (''+f).trim()
+
   if (f.match(/^".*"$/))
     f = JSON.parse(f)
 
@@ -281,7 +285,6 @@ function parseField (f, k, emptyIsFalse) {
 
   f = envReplace(f)
 
-
   if (isPath) {
     var homePattern = process.platform === 'win32' ? /^~(\/|\\)/ : /^~\//
     if (f.match(homePattern) && process.env.HOME) {
@@ -289,6 +292,9 @@ function parseField (f, k, emptyIsFalse) {
     }
     f = path.resolve(f)
   }
+
+  if (isNumber && !isNaN(f))
+    f = +f
 
   return f
 }

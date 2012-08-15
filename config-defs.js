@@ -18,6 +18,7 @@ try {
   } }
 }
 
+exports.Octal = Octal
 function Octal () {}
 function validateOctal (data, k, val) {
   // must be either an integer or an octal string.
