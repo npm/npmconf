@@ -4,7 +4,7 @@ var common = require('./00-setup.js')
 var fs = require('fs')
 var ini = require('ini')
 var expectConf =
-  [ 'globalconfig = /Users/isaacs/dev/js/npmconf/test/fixtures/globalconfig',
+  [ 'globalconfig = ' + common.globalconfig,
     'email = i@izs.me',
     'env-thing = asdf',
     'init.author.name = Isaac Z. Schlueter',
@@ -29,7 +29,7 @@ var expectConf =
     'httponly = true',
     '' ].join('\n')
 var expectFile =
-  [ 'globalconfig = /Users/isaacs/dev/js/npmconf/test/fixtures/globalconfig',
+  [ 'globalconfig = ' + common.globalconfig,
     'email = i@izs.me',
     'env-thing = asdf',
     'init.author.name = Isaac Z. Schlueter',
