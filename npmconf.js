@@ -15,6 +15,13 @@ exports.loaded = false
 exports.rootConf = null
 exports.usingBuiltin = false
 exports.defs = configDefs
+Object.defineProperty(exports, 'defaults', { get: function () {
+  return configDefs.defaults
+}, enumerable: true })
+Object.defineProperty(exports, 'types', { get: function () {
+  return configDefs.types
+}, enumerable: true })
+
 exports.validate = validate
 
 var myUid = process.env.SUDO_UID !== undefined
