@@ -136,25 +136,12 @@ function Conf (base) {
       this.root = base
   else
     this.root = configDefs.defaults
-
-  // whenever we save, make sure the permissions and such are good
-  this.on('save', function () {
-    function noop () {}
-    if (this.sources.user) {
-      if (myUid && myGid)
-        fs.chown(this.sources.user.path, +myUid, +myGid, noop)
-      fs.chmod(this.sources.user.path, 0666, noop)
-    }
-    if (this.sources.global)
-      fs.chmod(this.sources.global.path, 0600, noop)
-  })
 }
 
 Conf.prototype.save = function (where, cb) {
   var target = this.sources[where]
-  if (!target || !(target.path || target.source) || !target.data) {
+  if (!target || !(target.path || target.source) || !target.data)
     return this.emit('error', new Error('bad save target: '+where))
-  }
 
   if (target.source) {
     var pref = target.prefix || ''
@@ -164,7 +151,22 @@ Conf.prototype.save = function (where, cb) {
     return this
   }
 
-  var data = ini.stringify(target.data)
+  var data = target.data
+
+  if (typeof data._password === 'string' &&
+      typeof data.username === 'string') {
+    var auth = data.username + ':' + data._password
+    data = Object.keys(data).reduce(function (c, k) {
+      if (k === 'username' || k === '_password')
+        return c
+      c[k] = data[k]
+      return c
+    }, { _auth: new Buffer(auth, 'utf8').toString('base64') })
+    delete data.username
+    delete data._password
+  }
+
+  data = ini.stringify(data)
 
   then = then.bind(this)
   done = done.bind(this)
@@ -227,6 +229,13 @@ Conf.prototype.add = function (data, marker) {
   Object.keys(data).forEach(function (k) {
     data[k] = parseField(data[k], k)
   })
+  if (Object.prototype.hasOwnProperty.call(data, '_auth')) {
+    var auth = new Buffer(data._auth, 'base64').toString('utf8').split(':')
+    var username = auth.shift()
+    var password = auth.join(':')
+    data.username = username
+    data._password = password
+  }
   return CC.prototype.add.call(this, data, marker)
 }
 

@@ -3,7 +3,32 @@ var npmconf = require('../npmconf.js')
 var common = require('./00-setup.js')
 var fs = require('fs')
 var ini = require('ini')
-var expect =
+var expectConf =
+  [ 'globalconfig = /Users/isaacs/dev/js/npmconf/test/fixtures/globalconfig',
+    'email = i@izs.me',
+    'env-thing = asdf',
+    'init.author.name = Isaac Z. Schlueter',
+    'init.author.email = i@izs.me',
+    'init.author.url = http://blog.izs.me/',
+    'proprietary-attribs = false',
+    'npm:publishtest = true',
+    '_npmjs.org:couch = https://admin:password@localhost:5984/registry',
+    '_auth = dXNlcm5hbWU6cGFzc3dvcmQ=',
+    'npm-www:nocache = 1',
+    'sign-git-tag = false',
+    'message = v%s',
+    'strict-ssl = false',
+    'username = username',
+    '_password = password',
+    '',
+    '[_token]',
+    'AuthSession = yabba-dabba-doodle',
+    'version = 1',
+    'expires = 1345001053415',
+    'path = /',
+    'httponly = true',
+    '' ].join('\n')
+var expectFile =
   [ 'globalconfig = /Users/isaacs/dev/js/npmconf/test/fixtures/globalconfig',
     'email = i@izs.me',
     'env-thing = asdf',
@@ -35,12 +60,13 @@ test('saving configs', function (t) {
     conf.del('nodedir')
     conf.del('tmp')
     var foundConf = ini.stringify(conf.sources.user.data)
-    t.equal(foundConf, expect)
+    t.same(ini.parse(foundConf), ini.parse(expectConf))
+    fs.unlinkSync(common.userconfig)
     conf.save('user', function (er) {
       if (er)
         throw er
       var uc = fs.readFileSync(conf.get('userconfig'), 'utf8')
-      t.equal(uc, expect)
+      t.same(ini.parse(uc), ini.parse(expectFile))
       t.end()
     })
   })

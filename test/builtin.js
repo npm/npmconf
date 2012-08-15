@@ -19,6 +19,8 @@ var ucData =
     message: 'v%s',
     'strict-ssl': false,
     'tmp': process.env.HOME + '/.tmp',
+    username : "username",
+    _password : "password",
     _token:
      { AuthSession: 'yabba-dabba-doodle',
        version: '1',
