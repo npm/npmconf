@@ -78,15 +78,17 @@ function load (cli_, builtin_, cb_) {
   })
 
   // check for a builtin if provided.
+  exports.usingBuiltin = !!builtin
   var rc = exports.rootConf = new Conf()
   var defaults = configDefs.defaults
   if (builtin)
     rc.addFile(builtin, 'builtin')
-  else {
+  else
     rc.add({}, 'builtin')
-  }
+
   rc.on('load', function () {
     var conf = new Conf(rc)
+    conf.usingBuiltin = !!builtin
     conf.add(cli, 'cli')
     conf.addEnv()
     conf.addFile(conf.get('userconfig'), 'user')
