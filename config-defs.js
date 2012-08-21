@@ -7,6 +7,7 @@ var path = require("path")
   , semver = require("semver")
   , stableFamily = semver.parse(process.version)
   , nopt = require("nopt")
+  , os = require('os')
   , osenv = require("osenv")
 
 try {
@@ -168,6 +169,7 @@ Object.defineProperty(exports, "defaults", {get: function () {
     , "init.author.url" : ""
     , json: false
     , link: false
+    , "local-address" : undefined
     , loglevel : "http"
     , logstream : process.stderr
     , long : false
@@ -258,6 +260,18 @@ exports.types =
   , "init.author.url" : ["", url]
   , json: Boolean
   , link: Boolean
+  // local-address must be listed as an IP for a local network interface
+  // must be IPv4 due to node bug
+  , "local-address" : Object.keys(os.networkInterfaces()).map(function (nic) {
+                   return os.networkInterfaces()[nic].filter(function (addr) {
+                    return addr.family === "IPv4"
+                   })
+                   .map(function (addr) {
+                     return addr.address
+                   })
+                 }).reduce(function (curr, next) {
+                  return curr.concat(next)
+                 }, [])
   , loglevel : ["silent","win","error","warn","http","info","verbose","silly"]
   , logstream : Stream
   , long : Boolean
