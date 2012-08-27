@@ -105,10 +105,7 @@ Object.defineProperty(exports, "defaults", {get: function () {
   return defaults =
     { "always-auth" : false
 
-      // are there others?
-    , browser : process.platform === "darwin" ? "open"
-              : process.platform === "win32" ? "start"
-              : "google-chrome"
+    , browser : ""
 
     , ca : // the npm CA certificate.
       "-----BEGIN CERTIFICATE-----\n"+
