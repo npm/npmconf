@@ -11,7 +11,8 @@
     "inherits": "~1.0.0",
     "once": "~1.1.1",
     "mkdirp": "~0.3.3",
-    "osenv": "0.0.3"
+    "osenv": "0.0.3",
+    "nopt": "~2.0.0"
   },
   "devDependencies": {},
   "scripts": {
@@ -29,8 +30,5 @@
     "ini"
   ],
   "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me)",
-  "license": "BSD",
-  "optionalDependencies": {
-    "nopt": "~2.0.0"
-  }
+  "license": "BSD"
 }
