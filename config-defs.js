@@ -214,6 +214,7 @@ Object.defineProperty(exports, "defaults", {get: function () {
     , long : false
     , message : "%s"
     , "node-version" : process.version
+    , "no-proxy" : process.env.NO_PROXY || process.env.no_proxy || "null"
     , npaturl : "http://npat.npmjs.org/"
     , npat : false
     , "onload-script" : false
@@ -305,6 +306,7 @@ exports.types =
   , long : Boolean
   , message: String
   , "node-version" : [null, semver]
+  , "no-proxy" : ["null", String]
   , npaturl : url
   , npat : Boolean
   , "onload-script" : [null, String]
