@@ -240,6 +240,7 @@ Object.defineProperty(exports, "defaults", {get: function () {
     , shell : osenv.shell()
     , "sign-git-tag": false
     , "strict-ssl": true
+    , "skip-installed": false
     , tag : "latest"
     , tmp : temp
     , unicode : true
@@ -332,6 +333,7 @@ exports.types =
   , shell : String
   , "sign-git-tag": Boolean
   , "strict-ssl": Boolean
+  , "skip-installed": Boolean
   , tag : String
   , tmp : path
   , unicode : Boolean
