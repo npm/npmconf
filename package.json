@@ -1,6 +1,6 @@
 {
   "name": "npmconf",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "The config thing npm uses",
   "main": "npmconf.js",
   "directories": {
