@@ -113,7 +113,7 @@ Object.defineProperty(exports, "defaults", {get: function () {
 
   return defaults =
     { "always-auth" : false
-
+    , "bin-links" : true
     , browser : null
 
     , ca : // the npm CA certificate.
@@ -273,6 +273,7 @@ Object.defineProperty(exports, "defaults", {get: function () {
 
 exports.types =
   { "always-auth" : Boolean
+  , "bin-links": Boolean
   , browser : [null, String]
   , ca: [null, String, Array]
   , cache : path
