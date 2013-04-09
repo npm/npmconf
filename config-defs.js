@@ -351,6 +351,7 @@ exports.types =
   , userignorefile : path
   , umask: Octal
   , version : Boolean
+  , "version-prefix": String
   , versions : Boolean
   , viewer: String
   , yes: [false, null, Boolean]
