@@ -16,7 +16,9 @@
     "semver": "2",
     "ini": "~1.1.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "tap": "~0.4.0"
+  },
   "scripts": {
     "test": "tap test/*.js"
   },
