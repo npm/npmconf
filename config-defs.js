@@ -235,6 +235,7 @@ Object.defineProperty(exports, "defaults", {get: function () {
     , globalignorefile : path.resolve( globalPrefix, "etc", "npmignore")
     , group : process.platform === "win32" ? 0
             : process.env.SUDO_GID || (process.getgid && process.getgid())
+    , heading: "npm"
     , ignore: ""
     , "init-module": path.resolve(home, '.npm-init.js')
     , "init.version" : "0.0.0"
@@ -330,6 +331,7 @@ exports.types =
   , group : [Number, String]
   , "https-proxy" : [null, url]
   , "user-agent" : String
+  , "heading": String
   , ignore : String
   , "init-module": path
   , "init.version" : [null, semver]
