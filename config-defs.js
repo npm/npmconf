@@ -277,6 +277,7 @@ Object.defineProperty(exports, "defaults", {get: function () {
     , shrinkwrap: true
     , "sign-git-tag": false
     , "strict-ssl": true
+    , "skip-installed": false
     , tag : "latest"
     , tmp : temp
     , unicode : true
@@ -371,6 +372,7 @@ exports.types =
   , shrinkwrap: Boolean
   , "sign-git-tag": Boolean
   , "strict-ssl": Boolean
+  , "skip-installed": Boolean
   , tag : String
   , tmp : path
   , unicode : Boolean
