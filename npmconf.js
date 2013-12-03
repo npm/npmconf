@@ -352,14 +352,20 @@ Conf.prototype.addEnv = function (env) {
   env = env || process.env
   var conf = {}
   Object.keys(env)
-    .filter(function (k) { return k.match(/^npm_config_[^_]/i) })
+    .filter(function (k) { return k.match(/^npm_config__?/i) })
     .forEach(function (k) {
       if (!env[k])
         return
 
-      conf[k.replace(/^npm_config_/i, '')
-            .toLowerCase()
-            .replace(/_/g, '-')] = env[k]
+      // leave first char untouched, even if
+      // it is a "_" - convert all other to "-"
+      var t = k.replace(/^npm_config_/i, '')
+          .toLowerCase()
+      var s = t.substr(1)
+          .replace(/_/g, '-')
+      var p = t.substr(0, 1)
+
+      conf[p + s] = env[k]
     })
   return CC.prototype.addEnv.call(this, '', conf, 'env')
 }
