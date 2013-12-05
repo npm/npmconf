@@ -34,7 +34,7 @@ var gcData = { 'package-config:foo': 'boo' }
 
 var biData = { 'builtin-config': true }
 
-var cli = { foo: 'bar', heading: 'foo' }
+var cli = { foo: 'bar', heading: 'foo', 'skip-git-tag': true }
 
 var expectList =
 [ cli,
@@ -68,6 +68,7 @@ test('with builtin', function (t) {
     t.equal(npmconf.rootConf.root, npmconf.defs.defaults)
     t.equal(conf.root, npmconf.defs.defaults)
     t.equal(conf.get('heading'), 'foo')
+    t.equal(conf.get('skip-git-tag'), true)
     t.end()
   })
 })
