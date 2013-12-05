@@ -386,6 +386,7 @@ exports.types =
   , shell : String
   , shrinkwrap: Boolean
   , "sign-git-tag": Boolean
+  , "skip-git-tag": Boolean
   , "strict-ssl": Boolean
   , tag : String
   , tmp : path
