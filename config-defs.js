@@ -239,6 +239,7 @@ Object.defineProperty(exports, "defaults", {get: function () {
             : process.env.SUDO_GID || (process.getgid && process.getgid())
     , heading: "npm"
     , ignore: ""
+    , "ignore-scripts": false
     , "init-module": path.resolve(home, '.npm-init.js')
     , "init.version" : "0.0.0"
     , "init.author.name" : ""
@@ -337,6 +338,7 @@ exports.types =
   , "user-agent" : String
   , "heading": String
   , ignore : String
+  , "ignore-scripts": Boolean
   , "init-module": path
   , "init.version" : [null, semver]
   , "init.author.name" : String
