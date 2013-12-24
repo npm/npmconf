@@ -222,7 +222,7 @@ Object.defineProperty(exports, "defaults", {get: function () {
     , description : true
     , dev : false
     , editor : osenv.editor()
-    , email: null
+    , email: ""
     , "engine-strict": false
     , force : false
 
