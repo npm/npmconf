@@ -134,6 +134,7 @@ Object.defineProperty(exports, "defaults", {get: function () {
     , depth: Infinity
     , description : true
     , dev : false
+    , exact: false
     , editor : osenv.editor()
     , email: ""
     , "engine-strict": false
