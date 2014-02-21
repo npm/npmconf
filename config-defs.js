@@ -338,6 +338,7 @@ exports.shorthands =
   , f : ["--force"]
   , gangster : ["--force"]
   , gangsta : ["--force"]
+  , ninja : ["--force"]
   , desc : ["--description"]
   , "no-desc" : ["--no-description"]
   , "local" : ["--no-global"]
