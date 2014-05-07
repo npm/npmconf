@@ -196,6 +196,7 @@ Object.defineProperty(exports, "defaults", {get: function () {
     , shell : osenv.shell()
     , shrinkwrap: true
     , "sign-git-tag": false
+    , spin: true
     , "strict-ssl": true
     , tag : "latest"
     , tmp : temp
@@ -303,6 +304,7 @@ exports.types =
   , shell : String
   , shrinkwrap: Boolean
   , "sign-git-tag": Boolean
+  , spin: [Boolean, "always"]
   , "strict-ssl": Boolean
   , tag : String
   , tmp : path
