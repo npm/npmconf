@@ -162,7 +162,7 @@ Object.defineProperty(exports, "defaults", {get: function () {
     , key: null
     , link: false
     , "local-address" : undefined
-    , loglevel : "http"
+    , loglevel : "warn"
     , logstream : process.stderr
     , long : false
     , message : "%s"
