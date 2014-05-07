@@ -304,7 +304,7 @@ exports.types =
   , shell : String
   , shrinkwrap: Boolean
   , "sign-git-tag": Boolean
-  , spin: [Boolean, "always"]
+  , spin: ["always", Boolean]
   , "strict-ssl": Boolean
   , tag : String
   , tmp : path
