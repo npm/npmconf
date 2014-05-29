@@ -274,9 +274,12 @@ Conf.prototype.save = function (where, cb) {
   this._saving ++
 
   var mode = where === 'user' ? 0600 : 0666
-  if (!data.trim())
-    fs.unlink(target.path, done)
-  else {
+  if (!data.trim()) {
+    fs.unlink(target.path, function (er) {
+      // ignore the possible error (e.g. the file doesn't exist)
+      done(null)
+    })
+  } else {
     mkdirp(path.dirname(target.path), function (er) {
       if (er)
         return then(er)
