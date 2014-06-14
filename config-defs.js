@@ -189,7 +189,7 @@ Object.defineProperty(exports, "defaults", {get: function () {
     , "save-dev" : false
     , "save-exact" : false
     , "save-optional" : false
-    , "save-prefix": "^"
+    , "save-prefix": "~"
     , searchopts: ""
     , searchexclude: null
     , searchsort: "name"
