@@ -7,14 +7,15 @@ var path = require("path")
   , semver = require("semver")
   , stableFamily = semver.parse(process.version)
   , nopt = require("nopt")
-  , os = require('os')
+  , os = require("os")
   , osenv = require("osenv")
 
+var log
 try {
-  var log = require("npmlog")
+  log = require("npmlog")
 } catch (er) {
-  var util = require('util')
-  var log = { warn: function (m) {
+  var util = require("util")
+  log = { warn: function (m) {
     console.warn(m + util.format.apply(util, [].slice.call(arguments, 1)))
   } }
 }
@@ -48,7 +49,7 @@ nopt.typeDefs.semver = { type: semver, validate: validateSemver }
 nopt.typeDefs.Octal = { type: Octal, validate: validateOctal }
 nopt.typeDefs.Stream = { type: Stream, validate: validateStream }
 
-nopt.invalidHandler = function (k, val, type, data) {
+nopt.invalidHandler = function (k, val, type) {
   log.warn("invalid config", k + "=" + JSON.stringify(val))
 
   if (Array.isArray(type)) {
@@ -153,7 +154,7 @@ Object.defineProperty(exports, "defaults", {get: function () {
             : process.env.SUDO_GID || (process.getgid && process.getgid())
     , heading: "npm"
     , "ignore-scripts": false
-    , "init-module": path.resolve(home, '.npm-init.js')
+    , "init-module": path.resolve(home, ".npm-init.js")
     , "init.author.name" : ""
     , "init.author.email" : ""
     , "init.author.url" : ""
@@ -211,7 +212,7 @@ Object.defineProperty(exports, "defaults", {get: function () {
     , user : process.platform === "win32" ? 0 : "nobody"
     , username : ""
     , userconfig : path.resolve(home, ".npmrc")
-    , umask: 022
+    , umask: "022"
     , version : false
     , versions : false
     , viewer: process.platform === "win32" ? "browser" : "man"
