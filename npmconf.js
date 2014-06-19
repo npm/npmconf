@@ -139,15 +139,50 @@ function load_(builtin, rc, cli, cb) {
     conf.root = defaults
     conf.add(rc.shift(), 'builtin')
     conf.once('load', function () {
-      conf.loadExtras(function(er) {
-        if (er)
-          return cb(er)
-        // warn about invalid bits.
-        validate(conf)
-        exports.loaded = conf
-        cb(er, conf)
-      })
+      conf.loadExtras(afterExtras)
     })
+  }
+
+  function afterExtras(er) {
+    if (er)
+      return cb(er)
+
+    // warn about invalid bits.
+    validate(conf)
+
+    var cafile = conf.get('cafile')
+    if(cafile) {
+      return fs.readFile(cafile, 'utf8', afterCARead)
+    }
+
+    finalize(null)
+  }
+
+  function afterCARead(er, cadata) {
+    if (er)
+      return cb(er)
+
+    var delim = '-----END CERTIFICATE-----'
+    var output
+
+    output = cadata
+      .split(delim)
+      .filter(function(xs) {
+        return !!xs.trim()
+      })
+      .map(function(xs) {
+        return xs + delim
+      })
+
+    conf.set('ca', output)
+  }
+
+  function finalize(er) {
+    if (er)
+      return cb(er)
+
+    exports.loaded = conf
+    cb(er, conf)
   }
 }
 
@@ -224,6 +259,11 @@ Conf.prototype.save = function (where, cb) {
     }, { _auth: new Buffer(auth, 'utf8').toString('base64') })
     delete data.username
     delete data._password
+  }
+
+  // if there's a ca present
+  if (data.cafile && data.ca) {
+    delete data.ca
   }
 
   data = ini.stringify(data)

@@ -119,6 +119,7 @@ Object.defineProperty(exports, "defaults", {get: function () {
     , browser : null
 
     , ca: null
+    , cafile: null
 
     , cache : cache
 
@@ -226,6 +227,7 @@ exports.types =
   , "bin-links": Boolean
   , browser : [null, String]
   , ca: [null, String, Array]
+  , cafile : path
   , cache : path
   , "cache-lock-stale": Number
   , "cache-lock-retries": Number
