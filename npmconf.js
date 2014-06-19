@@ -153,33 +153,17 @@ function load_(builtin, rc, cli, cb) {
     var cafile = conf.get('cafile')
 
     if(cafile) {
-      return fs.readFile(cafile, 'utf8', afterCARead)
+      return conf.loadCAFile(cafile, finalize)
     }
 
     finalize()
   }
 
-  function afterCARead(er, cadata) {
-    if (er)
+  function finalize(er, cadata) {
+    if (er) {
       return cb(er)
+    }
 
-    var delim = '-----END CERTIFICATE-----'
-    var output
-
-    output = cadata
-      .split(delim)
-      .filter(function(xs) {
-        return !!xs.trim()
-      })
-      .map(function(xs) {
-        return xs.trimLeft() + delim
-      })
-
-    conf.set('ca', output)
-    finalize()
-  }
-
-  function finalize(er) {
     exports.loaded = conf
     cb(er, conf)
   }
@@ -207,6 +191,7 @@ function Conf (base) {
 }
 
 Conf.prototype.loadPrefix = require('./lib/load-prefix.js')
+Conf.prototype.loadCAFile = require('./lib/load-cafile.js')
 Conf.prototype.loadUid = require('./lib/load-uid.js')
 Conf.prototype.setUser = require('./lib/set-user.js')
 Conf.prototype.findPrefix = require('./lib/find-prefix.js')
