@@ -151,11 +151,12 @@ function load_(builtin, rc, cli, cb) {
     validate(conf)
 
     var cafile = conf.get('cafile')
+
     if(cafile) {
       return fs.readFile(cafile, 'utf8', afterCARead)
     }
 
-    finalize(null)
+    finalize()
   }
 
   function afterCARead(er, cadata) {
@@ -171,16 +172,14 @@ function load_(builtin, rc, cli, cb) {
         return !!xs.trim()
       })
       .map(function(xs) {
-        return xs + delim
+        return xs.trimLeft() + delim
       })
 
     conf.set('ca', output)
+    finalize()
   }
 
   function finalize(er) {
-    if (er)
-      return cb(er)
-
     exports.loaded = conf
     cb(er, conf)
   }
@@ -259,11 +258,6 @@ Conf.prototype.save = function (where, cb) {
     }, { _auth: new Buffer(auth, 'utf8').toString('base64') })
     delete data.username
     delete data._password
-  }
-
-  // if there's a ca present
-  if (data.cafile && data.ca) {
-    delete data.ca
   }
 
   data = ini.stringify(data)
