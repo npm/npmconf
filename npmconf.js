@@ -216,6 +216,8 @@ Conf.prototype.loadCAFile = require('./lib/load-cafile.js')
 Conf.prototype.loadUid = require('./lib/load-uid.js')
 Conf.prototype.setUser = require('./lib/set-user.js')
 Conf.prototype.findPrefix = require('./lib/find-prefix.js')
+Conf.prototype.getCredentialsByURI = require('./lib/get-credentials-by-uri.js')
+Conf.prototype.setCredentialsByURI = require('./lib/set-credentials-by-uri.js')
 
 Conf.prototype.loadExtras = function(cb) {
   this.setUser(function(er) {
@@ -251,22 +253,7 @@ Conf.prototype.save = function (where, cb) {
     return this
   }
 
-  var data = target.data
-
-  if (typeof data._password === 'string' &&
-      typeof data.username === 'string') {
-    var auth = data.username + ':' + data._password
-    data = Object.keys(data).reduce(function (c, k) {
-      if (k === 'username' || k === '_password')
-        return c
-      c[k] = data[k]
-      return c
-    }, { _auth: new Buffer(auth, 'utf8').toString('base64') })
-    delete data.username
-    delete data._password
-  }
-
-  data = ini.stringify(data)
+  var data = ini.stringify(target.data)
 
   then = then.bind(this)
   done = done.bind(this)
@@ -337,13 +324,6 @@ Conf.prototype.add = function (data, marker) {
   Object.keys(data).forEach(function (k) {
     data[k] = parseField(data[k], k)
   })
-  if (Object.prototype.hasOwnProperty.call(data, '_auth')) {
-    var auth = new Buffer(data._auth, 'base64').toString('utf8').split(':')
-    var username = auth.shift()
-    var password = auth.join(':')
-    data.username = username
-    data._password = password
-  }
   return CC.prototype.add.call(this, data, marker)
 }
 
