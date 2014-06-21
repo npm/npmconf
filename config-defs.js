@@ -137,7 +137,6 @@ Object.defineProperty(exports, "defaults", {get: function () {
     , description : true
     , dev : false
     , editor : osenv.editor()
-    , email: ""
     , "engine-strict": false
     , force : false
 
@@ -239,7 +238,6 @@ exports.types =
   , description : Boolean
   , dev : Boolean
   , editor : String
-  , email: [null, String]
   , "engine-strict": Boolean
   , force : Boolean
   , "fetch-retries": Number
