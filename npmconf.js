@@ -152,7 +152,7 @@ function load_(builtin, rc, cli, cb) {
 
     var cafile = conf.get('cafile')
 
-    if(cafile) {
+    if (cafile) {
       return conf.loadCAFile(cafile, finalize)
     }
 
