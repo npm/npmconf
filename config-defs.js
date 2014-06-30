@@ -159,6 +159,7 @@ Object.defineProperty(exports, "defaults", {get: function () {
     , "init.author.name" : ""
     , "init.author.email" : ""
     , "init.author.url" : ""
+    , "init.version": "0.0.0"
     , "init.license": "ISC"
     , json: false
     , key: null
