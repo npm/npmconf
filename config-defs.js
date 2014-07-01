@@ -213,7 +213,7 @@ Object.defineProperty(exports, "defaults", {get: function () {
     , user : process.platform === "win32" ? 0 : "nobody"
     , username : ""
     , userconfig : path.resolve(home, ".npmrc")
-    , umask: "022"
+    , umask: process.umask ? process.umask() : parseInt("022", 8)
     , version : false
     , versions : false
     , viewer: process.platform === "win32" ? "browser" : "man"
