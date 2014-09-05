@@ -288,7 +288,6 @@ exports.types =
   , "save-exact" : Boolean
   , "save-optional" : Boolean
   , "save-prefix": String
-  , scope : String
   , searchopts : String
   , searchexclude: [null, String]
   , searchsort: [ "name", "-name"
