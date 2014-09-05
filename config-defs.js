@@ -192,7 +192,6 @@ Object.defineProperty(exports, "defaults", {get: function () {
     , "save-exact" : false
     , "save-optional" : false
     , "save-prefix": "^"
-    , scope : ""
     , searchopts: ""
     , searchexclude: null
     , searchsort: "name"
