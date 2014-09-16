@@ -104,7 +104,7 @@ else home = path.resolve(temp, "npm-" + uidOrPid)
 
 var cacheExtra = process.platform === "win32" ? "npm-cache" : ".npm"
 var cacheRoot = process.platform === "win32" && process.env.APPDATA || home
-var cache = path.resolve(cacheRoot, cacheExtra)
+var cache = process.env.NPM_CONFIG_CACHE ? process.env.NPM_CONFIG_CACHE : path.resolve(cacheRoot, cacheExtra)
 
 
 var globalPrefix
