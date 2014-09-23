@@ -131,10 +131,8 @@ Object.defineProperty(exports, "defaults", {get: function () {
     , "bin-links" : true
     , browser : null
 
-
     , ca: null
     , cafile: null
-
 
     , cache : cache
 
@@ -146,7 +144,6 @@ Object.defineProperty(exports, "defaults", {get: function () {
     , "cache-min": 10
 
     , cert: null
-
 
     , color : true
     , depth: Infinity
