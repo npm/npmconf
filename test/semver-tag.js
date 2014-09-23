@@ -12,7 +12,7 @@ var gcData = { 'package-config:foo': 'boo' }
 
 var biData = { 'builtin-config': true }
 
-var cli = { foo: 'bar', heading: 'foo', 'git-tag-version': false }
+var cli = { tag: 'v2.x' }
 
 var projectData = {}
 
@@ -23,6 +23,7 @@ var expectList =
   ucData,
   gcData,
   biData ]
+
 
 var expectSources =
 { cli: { data: cli },
@@ -44,16 +45,21 @@ var expectSources =
      data: gcData },
   builtin: { data: biData } }
 
-test('with builtin', function (t) {
+test('tag cannot be a SemVer', function (t) {
+  var messages = []
+  console.warn = function (m) {
+    messages.push(m)
+  }
+
+  var expect = [
+    'invalid config tag="v2.x"',
+    'invalid config Tag must not be a SemVer range'
+  ]
+
   npmconf.load(cli, common.builtin, function (er, conf) {
     if (er) throw er
-    t.same(conf.list, expectList)
-    t.same(conf.sources, expectSources)
-    t.same(npmconf.rootConf.list, [])
-    t.equal(npmconf.rootConf.root, npmconf.defs.defaults)
-    t.equal(conf.root, npmconf.defs.defaults)
-    t.equal(conf.get('heading'), 'foo')
-    t.equal(conf.get('git-tag-version'), false)
+    t.equal(conf.get('tag'), 'latest')
+    t.same(messages, expect)
     t.end()
   })
 })
