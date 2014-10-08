@@ -182,6 +182,7 @@ Object.defineProperty(exports, "defaults", {get: function () {
     , long : false
     , message : "%s"
     , "node-version" : process.version
+    , "noproxy" : process.env.NO_PROXY || process.env.no_proxy || ""
     , npat : false
     , "onload-script" : false
     , optional: true
@@ -284,6 +285,7 @@ exports.types =
   , long : Boolean
   , message: String
   , "node-version" : [null, semver]
+  , "noproxy" : String
   , npat : Boolean
   , "onload-script" : [null, String]
   , optional: Boolean
