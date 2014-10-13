@@ -1,6 +1,6 @@
 # npmconf
 
-The config thing npm uses
+The config thing npm uses. Also possibly [a conference](https://github.com/npm/npm_conf).
 
 If you are interested in interacting with the config settings that npm
 uses, then use this module.
