@@ -92,6 +92,7 @@ function load (cli_, builtin_, cb_) {
   rc.on('load', function () {
     load_(builtin, rc, cli, cb)
   })
+  rc.on('error', cb)
 }
 
 function load_(builtin, rc, cli, cb) {
@@ -322,9 +323,14 @@ Conf.prototype.parse = function (content, file) {
 }
 
 Conf.prototype.add = function (data, marker) {
-  Object.keys(data).forEach(function (k) {
-    data[k] = parseField(data[k], k)
-  })
+  try {
+    Object.keys(data).forEach(function (k) {
+      data[k] = parseField(data[k], k)
+    })
+  } catch (e) {
+    this.emit('error', e)
+    return this
+  }
   return CC.prototype.add.call(this, data, marker)
 }
 
@@ -361,8 +367,13 @@ function parseField (f, k) {
 
   f = (''+f).trim()
 
-  if (f.match(/^".*"$/))
-    f = JSON.parse(f)
+  if (f.match(/^".*"$/)) {
+    try {
+      f = JSON.parse(f)
+    } catch (e) {
+      throw new Error('Failed parsing JSON config key ' + k + ': ' + f)
+    }
+  }
 
   if (isBool && !isString && f === '')
     return true
