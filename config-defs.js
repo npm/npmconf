@@ -152,6 +152,7 @@ Object.defineProperty(exports, "defaults", {get: function () {
     , editor : osenv.editor()
     , "engine-strict": false
     , force : false
+    , "force-reinstall" : false
 
     , "fetch-retries": 2
     , "fetch-retry-factor": 10
@@ -254,6 +255,7 @@ exports.types =
   , editor : String
   , "engine-strict": Boolean
   , force : Boolean
+  , "force-reinstall" : Boolean
   , "fetch-retries": Number
   , "fetch-retry-factor": Number
   , "fetch-retry-mintimeout": Number
