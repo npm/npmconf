@@ -1,5 +1,13 @@
 # npmconf
 
+## THIS PACKAGE IS DEPRECATED
+
+**This package's functionality has been reintegrated directly into npm. There
+have been many changes made to npm's configuration since the last version of
+this package was published. It should not be considered a source of truth for
+npm configuration any longer, and npm itself is the best tool to use to manage
+its configuration. _Do not use this package._**
+
 The config thing npm uses
 
 If you are interested in interacting with the config settings that npm
